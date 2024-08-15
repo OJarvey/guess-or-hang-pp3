@@ -134,3 +134,8 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
     guessed_letters = set()
     attempts_left = attempts
     used_hint = False
+    
+    while attempts_left > 0:
+        print(f"\n{' '.join(guesses)}")
+        print(f"{Colors.YELLOW}Attempts Left: {attempts_left}{Colors.NORMAL}")
+        render_hangman_graphic(attempts - attempts_left, level)
