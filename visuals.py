@@ -22,6 +22,11 @@ class Colors:
     YELLOW = '\033[93m'
     PURPLE = '\033[95m'
     NORMAL = '\033[0m'
+    
+    @staticmethod
+    def get_available_colors():
+        """Returns a list of available colors."""
+        return [Colors.CYAN, Colors.RED, Colors.GREEN, Colors.ORANGE, Colors.BLUE, Colors.YELLOW, Colors.PURPLE]
 
     @staticmethod
     def supports_ansi():
@@ -113,3 +118,8 @@ def render_hangman_graphic(attempts, level):
         index = 1 + attempts
     elif level == 'hard':
         index = 2 + attempts
+        
+    if not Colors.supports_ansi():
+        print(HANGMAN_STAGES[index].replace(Colors.CYAN, '').replace(Colors.RED, '').replace(Colors.ORANGE, '').replace(Colors.NORMAL, ''))
+    else:
+        print(HANGMAN_STAGES[index])
