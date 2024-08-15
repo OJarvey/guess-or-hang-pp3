@@ -147,3 +147,11 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
             used_hint = True
             continue
         
+         # If the guess is a single letter
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed_letters:
+                print(f"{Colors.RED}You've already guessed that letter!{Colors.NORMAL}")
+                continue
+
+            guessed_letters.add(guess)
+        
