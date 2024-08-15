@@ -55,3 +55,12 @@ def provide_hint(word: str, guesses: list, max_attempts: int, attempts_left: int
     print(f"{Colors.GREEN}Hint used! Remaining attempts: {attempts_left}{Colors.NORMAL}")
 
     return guesses, attempts_left
+
+def request_replay() -> bool:
+    """Asks the player if they would like to play another round."""
+    while True:
+        choice = input(f"{Colors.PURPLE}Play again? (y/n): {Colors.NORMAL}").lower()
+        if choice in ['y', 'n']:
+            return choice == 'y'
+        else:
+            print(f"{Colors.RED}Invalid input. Please enter 'y' or 'n'.{Colors.NORMAL}")
