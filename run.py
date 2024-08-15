@@ -102,3 +102,6 @@ def select_difficulty() -> str:
     print(f"{Colors.RED}3. Hard{Colors.NORMAL}")
     
     choice = input(f"{Colors.PURPLE}Select (1/2/3): {Colors.NORMAL}")
+    
+    levels = {'1': 'easy', '2': 'medium', '3': 'hard'}
+    return levels.get(choice, 'medium')
