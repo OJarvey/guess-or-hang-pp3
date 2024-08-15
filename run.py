@@ -48,3 +48,10 @@ def provide_hint(word: str, guesses: list, max_attempts: int, attempts_left: int
     if not unguessed_indices:
         print(f"{Colors.RED}No more hints can be provided!{Colors.NORMAL}")
         return guesses, attempts_left
+    
+    hint_index = random.choice(unguessed_indices)
+    guesses[hint_index] = word[hint_index]
+    attempts_left -= 1
+    print(f"{Colors.GREEN}Hint used! Remaining attempts: {attempts_left}{Colors.NORMAL}")
+
+    return guesses, attempts_left
