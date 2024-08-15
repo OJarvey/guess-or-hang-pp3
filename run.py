@@ -14,6 +14,3 @@ SCOPED_CREDS = CREDENTIALS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('guess-or-hang')
 
-sheet1 = SHEET.worksheet('sheet1')
-data = sheet1.get_all_values()
-print(data)
