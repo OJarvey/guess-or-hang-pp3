@@ -139,3 +139,11 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
         print(f"\n{' '.join(guesses)}")
         print(f"{Colors.YELLOW}Attempts Left: {attempts_left}{Colors.NORMAL}")
         render_hangman_graphic(attempts - attempts_left, level)
+        
+        guess = input(f"{Colors.PURPLE}Enter a letter or guess the entire word: {Colors.NORMAL}").lower()
+        
+        if guess == 'hint' and not used_hint:
+            guesses, attempts_left = provide_hint(word, guesses, attempts, attempts_left)
+            used_hint = True
+            continue
+        
