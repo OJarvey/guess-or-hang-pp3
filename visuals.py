@@ -102,3 +102,8 @@ def render_hangman_graphic(attempts, level):
     valid_levels = ['easy', 'medium', 'hard']
     if not isinstance(level, str) or level not in valid_levels:
      raise ValueError(f"Invalid level: {level}. Must be one of {valid_levels}.")
+ 
+    max_attempts = len(HANGMAN_STAGES) - 1
+    
+    if not (0 <= attempts <= max_attempts):
+        raise ValueError(f"Invalid number of attempts: {attempts}. Must be between 0 and {max_attempts}.")
