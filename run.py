@@ -105,3 +105,25 @@ def select_difficulty() -> str:
     
     levels = {'1': 'easy', '2': 'medium', '3': 'hard'}
     return levels.get(choice, 'medium')
+
+def display_instructions():
+    """Shows the instructions for playing Hangman."""
+    instructions = f"""{Colors.CYAN}
+    **Hangman Rules**
+
+    Objective: Guess the hidden word before running out of lives.
+    Difficulty Levels:
+    - Easy: 7 lives.
+    - Medium: 5 lives.
+    - Hard: 3 lives.
+
+    How to Play:
+   
+    - Input one letter at a time.
+    - Use hints strategically by typing 'hint'; they cost a life.
+    - Guess the entire word correctly before lives run out to win.
+
+    Enjoy and good luck!{Colors.NORMAL}
+    """
+    print(instructions)
+    input(f"{Colors.PURPLE}Press Enter to return to the menu...{Colors.NORMAL}")
