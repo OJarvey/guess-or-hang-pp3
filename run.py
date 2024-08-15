@@ -154,4 +154,10 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
                 continue
 
             guessed_letters.add(guess)
+            
+        if guess in word:
+                for i, char in enumerate(word):
+                    if char == guess:
+                        guesses[i] = guess
+                print(f"{Colors.GREEN}Correct!{Colors.NORMAL}")
         
