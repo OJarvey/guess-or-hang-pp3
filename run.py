@@ -43,7 +43,6 @@ def fetch_word() -> str:
 
 def provide_hint(word: str,
                  guesses: list,
-                 max_attempts: int,
                  attempts_left: int) -> tuple:
     """Provides a hint by revealing a random unguessed letter."""
     if attempts_left <= 1:
