@@ -127,3 +127,10 @@ def display_instructions():
     """
     print(instructions)
     input(f"{Colors.PURPLE}Press Enter to return to the menu...{Colors.NORMAL}")
+    
+# Core Gameplay Functions
+def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
+    """Manages the gameplay loop for one round."""
+    guessed_letters = set()
+    attempts_left = attempts
+    used_hint = False
