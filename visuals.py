@@ -1,6 +1,7 @@
 import os
 import shutil
 
+
 class Colors:
     """
     Provides ANSI escape codes for colored output.
@@ -23,16 +24,26 @@ class Colors:
     YELLOW = '\033[93m'
     PURPLE = '\033[95m'
     NORMAL = '\033[0m'
-    
+
     @staticmethod
     def get_available_colors():
         """Returns a list of available colors."""
-        return [Colors.CYAN, Colors.RED, Colors.GREEN, Colors.ORANGE, Colors.BLUE, Colors.YELLOW, Colors.PURPLE]
+        return [
+            Colors.CYAN,
+            Colors.RED,
+            Colors.GREEN,
+            Colors.ORANGE,
+            Colors.BLUE,
+            Colors.YELLOW,
+            Colors.PURPLE
+        ]
 
     @staticmethod
     def supports_ansi():
         """Check if the terminal supports ANSI escape codes."""
-        return os.getenv('ANSICON') is not None or os.getenv('TERM') == 'xterm' or 'COLORTERM' in os.environ
+        return (os.getenv('ANSICON') is not None or
+                os.getenv('TERM') == 'xterm' or
+                'COLORTERM' in os.environ)
 
 
 HANGMAN_STAGES = [
@@ -76,7 +87,7 @@ HANGMAN_STAGES = [
   +---+
   |   |
   O   |
- /|\  |
+ /|\\ |
       |
       |
 {Colors.NORMAL}
@@ -85,7 +96,7 @@ HANGMAN_STAGES = [
   +---+
   |   |
   O   |
- /|\  |
+ /|\\ |
  /    |
       |
 {Colors.NORMAL}
@@ -94,12 +105,13 @@ HANGMAN_STAGES = [
   +---+
   |   |
   O   |
- /|\  |
- / \  |
+ /|\\ |
+ / \\ |
       |
 {Colors.NORMAL}
 """
 ]
+
 
 def render_hangman_graphic(attempts, level):
     """
@@ -107,33 +119,49 @@ def render_hangman_graphic(attempts, level):
     """
     valid_levels = ['easy', 'medium', 'hard']
     if not isinstance(level, str) or level not in valid_levels:
-     raise ValueError(f"Invalid level: {level}. Must be one of {valid_levels}.")
- 
+        raise ValueError(f"Invalid level: Must be one of {valid_levels}.")
+
     max_attempts = len(HANGMAN_STAGES) - 1
-    
+
     if not (0 <= attempts <= max_attempts):
-        raise ValueError(f"Invalid number of attempts: {attempts}. Must be between 0 and {max_attempts}.")
+        raise ValueError(
+            f"Invalid number of attempt:Must be between 0 and {max_attempts}.")
 
     index = attempts
     if level == 'medium':
         index = 1 + attempts
     elif level == 'hard':
         index = 2 + attempts
-        
+
     if not Colors.supports_ansi():
-        print(HANGMAN_STAGES[index].replace(Colors.CYAN, '').replace(Colors.RED, '').replace(Colors.ORANGE, '').replace(Colors.NORMAL, ''))
+        print(
+            HANGMAN_STAGES[index].replace(Colors.CYAN, '')
+            .replace(Colors.RED, '')
+            .replace(Colors.ORANGE, '')
+            .replace(Colors.NORMAL, '')
+        )
     else:
         print(HANGMAN_STAGES[index])
-        
+
 
 def check_and_print(text):
     """
-    Check if the terminal supports ANSI escape codes and print the text accordingly.
+    Checks terminal size and ANSI support, and prints text accordingly.
     """
+    columns, lines = shutil.get_terminal_size(fallback=(80, 20))
     if Colors.supports_ansi():
-        print(text)
+        if (len(text.splitlines()[0]) > columns or
+                len(text.splitlines()) > lines):
+            print("Your terminal is too small to display the full text.")
+        else:
+            print(text)
     else:
-        print(text.replace(Colors.CYAN, '').replace(Colors.RED, '').replace(Colors.ORANGE, '').replace(Colors.NORMAL, ''))
+        print(
+            text.replace(Colors.CYAN, '')
+            .replace(Colors.RED, '')
+            .replace(Colors.ORANGE, '')
+            .replace(Colors.NORMAL, '')
+        )
 
 
 def display_title():
@@ -149,23 +177,24 @@ def display_title():
 *██║  ██║██║  ██║██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██║  ██║██║ ╚████║*
 *╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝*
 ******************************************************************
-    {Colors.NORMAL}"""
-    
+{Colors.NORMAL}"""
+
     check_and_print(title)
+
 
 def display_victory():
     """
     Display the victory screen.
     """
     victory = f"""{Colors.GREEN}
-*********************************************************************************
-*██╗    ██╗███████╗██╗     ██╗         ██████╗  ██████╗ ███╗   ██╗███████╗██╗██╗*
-*██║    ██║██╔════╝██║     ██║         ██╔══██╗██╔═══██╗████╗  ██║██╔════╝██║██║*
-*██║ █╗ ██║█████╗  ██║     ██║         ██║  ██║██║   ██║██╔██╗ ██║█████╗  ██║██║*
-*██║███╗██║██╔══╝  ██║     ██║         ██║  ██║██║   ██║██║╚██╗██║██╔══╝  ╚═╝╚═╝*
-*╚███╔███╔╝███████╗███████╗███████╗    ██████╔╝╚██████╔╝██║ ╚████║███████╗██╗██╗*
-* ╚══╝╚══╝ ╚══════╝╚══════╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝╚═╝*
-*********************************************************************************
+*******************************************************************************
+*██╗    ██╗███████╗██╗     ██╗       ██████╗  ██████╗ ███╗   ██╗███████╗██╗██╗*
+*██║    ██║██╔════╝██║     ██║       ██╔══██╗██╔═══██╗████╗  ██║██╔════╝██║██║*
+*██║ █╗ ██║█████╗  ██║     ██║       ██║  ██║██║   ██║██╔██╗ ██║█████╗  ██║██║*
+*██║███╗██║██╔══╝  ██║     ██║       ██║  ██║██║   ██║██║╚██╗██║██╔══╝  ╚═╝╚═╝*
+*╚███╔███╔╝███████╗███████╗███████╗  ██████╔╝╚██████╔╝██║ ╚████║███████╗██╗██╗*
+* ╚══╝╚══╝ ╚══════╝╚══════╝╚══════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝╚═╝*
+*******************************************************************************
 
 ********************************************************************
 *██╗   ██╗ ██████╗ ██╗   ██╗    ██████╗ ██╗██████╗     ██╗████████╗*
@@ -175,9 +204,10 @@ def display_victory():
 *   ██║   ╚██████╔╝╚██████╔╝    ██████╔╝██║██████╔╝    ██║   ██║   *
 *   ╚═╝    ╚═════╝  ╚═════╝     ╚═════╝ ╚═╝╚═════╝     ╚═╝   ╚═╝   *
 ********************************************************************
-    {Colors.NORMAL}"""
+{Colors.NORMAL}"""
 
     check_and_print(victory)
+
 
 def display_defeat():
     """
@@ -192,17 +222,6 @@ def display_defeat():
 *╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║*
 * ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝*
 ****************************************************************************
-    {Colors.NORMAL}"""
+{Colors.NORMAL}"""
 
     check_and_print(defeat)
-    
-def check_and_print(text):
-    """
-    Checks terminal size and ANSI support, and prints text accordingly.
-    """
-    columns, lines = shutil.get_terminal_size(fallback=(80, 20))
-    if Colors.supports_ansi():
-        if len(text.splitlines()[0]) > columns or len(text.splitlines()) > lines:
-            print("Your terminal is too small to display the full text.")
-        else:
-            print(text)
