@@ -107,3 +107,9 @@ def render_hangman_graphic(attempts, level):
     
     if not (0 <= attempts <= max_attempts):
         raise ValueError(f"Invalid number of attempts: {attempts}. Must be between 0 and {max_attempts}.")
+
+    index = attempts
+    if level == 'medium':
+        index = 1 + attempts
+    elif level == 'hard':
+        index = 2 + attempts
