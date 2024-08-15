@@ -1,4 +1,5 @@
 import os
+import shutil
 
 class Colors:
     """
@@ -194,3 +195,14 @@ def display_defeat():
     {Colors.NORMAL}"""
 
     check_and_print(defeat)
+    
+def check_and_print(text):
+    """
+    Checks terminal size and ANSI support, and prints text accordingly.
+    """
+    columns, lines = shutil.get_terminal_size(fallback=(80, 20))
+    if Colors.supports_ansi():
+        if len(text.splitlines()[0]) > columns or len(text.splitlines()) > lines:
+            print("Your terminal is too small to display the full text.")
+        else:
+            print(text)
