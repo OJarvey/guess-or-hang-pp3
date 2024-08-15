@@ -37,3 +37,14 @@ def fetch_word() -> str:
         raise ValueError(f"Spreadsheet 'guess-or-hang' not found: {e}")
     except Exception as e:
         raise ValueError(f"An unexpected error occurred: {e}")
+    
+def provide_hint(word: str, guesses: list, max_attempts: int, attempts_left: int) -> tuple:
+    """Provides a hint by revealing a random unguessed letter."""
+    if attempts_left <= 1:
+        print(f"{Colors.RED}No hints available!{Colors.NORMAL}")
+        return guesses, attempts_left
+    
+    unguessed_indices = [i for i, char in enumerate(guesses) if char == '_']
+    if not unguessed_indices:
+        print(f"{Colors.RED}No more hints can be provided!{Colors.NORMAL}")
+        return guesses, attempts_left
