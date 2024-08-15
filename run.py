@@ -145,6 +145,7 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
         if guess == 'hint' and not used_hint:
             guesses, attempts_left = provide_hint(word, guesses, attempts, attempts_left)
             used_hint = True
+            # Skip to the next iteration of the loop
             continue
         
          # If the guess is a single letter
@@ -164,3 +165,45 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
         else:
             attempts_left -= 1
             print(f"{Colors.RED}Wrong guess!{Colors.NORMAL}")
+            
+        # If the guess is the entire word
+        elif len(guess) == len(word):
+        if guess == word:
+            guesses = list(word) 
+            print(f"{Colors.GREEN}Congratulations! You've guessed the word: {word}{Colors.NORMAL}")
+            display_victory()
+            return True
+        else:
+            attempts_left -= 1
+            print(f"{Colors.RED}Incorrect word guess! You lose an attempt.{Colors.NORMAL}")
+        else:
+        print(f"{Colors.RED}Invalid input. Please guess a single letter or the entire word.{Colors.NORMAL}")
+        continue
+        
+       
+    if '_' not in guesses:
+            print(f"{Colors.GREEN}You guessed the word: {word}{Colors.NORMAL}")
+            display_victory()
+            return True
+
+    display_defeat()
+    print(f"{Colors.RED}The word was: {word}{Colors.NORMAL}")
+    render_hangman_graphic(attempts - attempts_left, level)
+    return False
+
+def main_game():
+    """Controls the main game execution."""
+    display_title()
+    while True:
+        choice = show_main_menu()
+
+        if choice == '1':
+            difficulty = select_difficulty()
+            while True:
+                word, guesses, attempts = setup_game(difficulty)
+                if word is None:
+                    print("Unable to start game due to setup issue.")
+                    return
+                won = play_round(word, guesses, attempts, difficulty)
+                if not request_replay():
+                    break
