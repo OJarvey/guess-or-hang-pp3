@@ -93,3 +93,10 @@ def show_main_menu() -> str:
     print(f"{Colors.RED}3. Exit{Colors.NORMAL}")
 
     return input(f"{Colors.PURPLE}Choose an option (1/2/3): {Colors.NORMAL}")
+
+def select_difficulty() -> str:
+    """Prompts user to select a difficulty level."""
+    print(f"{Colors.PURPLE}\nChoose Difficulty Level:{Colors.NORMAL}")
+    print(f"{Colors.GREEN}1. Easy{Colors.NORMAL}")
+    print(f"{Colors.YELLOW}2. Medium{Colors.NORMAL}")
+    print(f"{Colors.RED}3. Hard{Colors.NORMAL}")
