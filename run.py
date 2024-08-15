@@ -2,11 +2,11 @@ import random
 import gspread
 from google.oauth2.service_account import Credentials
 from visuals import (
-        display_title, 
-        display_victory, 
-        display_defeat, 
-        render_hangman_graphic, 
-        Colors
+    display_title, 
+    display_victory, 
+    display_defeat, 
+    render_hangman_graphic, 
+    Colors
 )
 
 # Constants
@@ -130,7 +130,9 @@ def display_instructions():
     
 # Core Gameplay Functions
 def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
-    """Manages the gameplay loop for one round."""
+    """
+    Manages the gameplay loop for one round.
+    """
     guessed_letters = set()
     attempts_left = attempts
     used_hint = False
@@ -145,10 +147,10 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
         if guess == 'hint' and not used_hint:
             guesses, attempts_left = provide_hint(word, guesses, attempts, attempts_left)
             used_hint = True
-            # Skip to the next iteration of the loop
+            
             continue
         
-         # If the guess is a single letter
+        # If the guess is a single letter
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
                 print(f"{Colors.RED}You've already guessed that letter!{Colors.NORMAL}")
@@ -156,31 +158,31 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
 
             guessed_letters.add(guess)
             
-        if guess in word:
+            if guess in word:
                 for i, char in enumerate(word):
                     if char == guess:
                         guesses[i] = guess
                 print(f"{Colors.GREEN}Correct!{Colors.NORMAL}")
                 
-        else:
-            attempts_left -= 1
-            print(f"{Colors.RED}Wrong guess!{Colors.NORMAL}")
+            else:
+                attempts_left -= 1
+                print(f"{Colors.RED}Wrong guess!{Colors.NORMAL}")
             
         # If the guess is the entire word
         elif len(guess) == len(word):
-        if guess == word:
-            guesses = list(word) 
-            print(f"{Colors.GREEN}Congratulations! You've guessed the word: {word}{Colors.NORMAL}")
-            display_victory()
-            return True
+            
+            if guess == word:
+                guesses = list(word) 
+                print(f"{Colors.GREEN}Congratulations! You've guessed the word: {word}{Colors.NORMAL}")
+                display_victory()
+                return True
+            else:
+                attempts_left -= 1
+                print(f"{Colors.RED}Incorrect word guess! You lose an attempt.{Colors.NORMAL}")
         else:
-            attempts_left -= 1
-            print(f"{Colors.RED}Incorrect word guess! You lose an attempt.{Colors.NORMAL}")
-        else:
-        print(f"{Colors.RED}Invalid input. Please guess a single letter or the entire word.{Colors.NORMAL}")
-        continue
-        
-       
+            print(f"{Colors.RED}Invalid input. Please guess a single letter or the entire word.{Colors.NORMAL}")
+            continue
+              
     if '_' not in guesses:
             print(f"{Colors.GREEN}You guessed the word: {word}{Colors.NORMAL}")
             display_victory()
@@ -207,3 +209,18 @@ def main_game():
                 won = play_round(word, guesses, attempts, difficulty)
                 if not request_replay():
                     break
+        elif choice == '2':
+                    display_instructions()
+                    
+        elif choice == '3':
+            print(f"{Colors.RED}Thanks for playing!{Colors.NORMAL}")
+            break
+        
+        else:
+            print(f"{Colors.RED}Invalid selection. Please choose again.{Colors.NORMAL}")
+                    
+if __name__ == "__main__":
+    print("Welcome to Guess Or Hang a HANGMAN game.")
+    print ("The goal is to guess the name of a country.")
+    main_game()
+                
