@@ -41,9 +41,7 @@ def fetch_word() -> str:
         raise ValueError(f"An unexpected error occurred: {e}")
 
 
-def provide_hint(word: str,
-                 guesses: list,
-                 attempts_left: int) -> tuple:
+def provide_hint(word, guesses, attempts_left):
     """Provides a hint by revealing a random unguessed letter."""
     if attempts_left <= 1:
         print(f"{Colors.RED}No hints available!{Colors.NORMAL}")
@@ -155,40 +153,27 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
         print(f"\n{' '.join(guesses)}")
         print(f"{Colors.YELLOW}Attempts Left: {attempts_left}{Colors.NORMAL}")
         render_hangman_graphic(attempts - attempts_left, level)
-        message = "Enter a letter or guess the entire word: "
+        message = "Enter a letter or guess the entire word:"
         guess = input(f"{Colors.PURPLE}{message}{Colors.NORMAL}").lower()
 
         if guess == 'hint' and not used_hint:
-            guesses, attempts_left = provide_hint(word,
-                                                  guesses,
-                                                  attempts,
-                                                  attempts_left)
+            guesses, attempts_left = provide_hint(word, guesses, attempts_left)
             used_hint = True
-
             continue
 
         # If the guess is a single letter
         if len(guess) == 1 and guess.isalpha():
-            if guess in guessed_letters:
-                message = "You've already guessed that letter!"
-                print(f"{Colors.RED}{message}{Colors.NORMAL}")
-                continue
-
-            guessed_letters.add(guess)
-
             if guess in word:
                 for i, char in enumerate(word):
                     if char == guess:
                         guesses[i] = guess
                 print(f"{Colors.GREEN}Correct!{Colors.NORMAL}")
-
             else:
                 attempts_left -= 1
                 print(f"{Colors.RED}Wrong guess!{Colors.NORMAL}")
 
         # If the guess is the entire word
         elif len(guess) == len(word):
-
             if guess == word:
                 guesses = list(word)
                 message = "Congratulations! You've guessed the word: "
@@ -204,8 +189,10 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
             print(f"{Colors.RED}{message}{Colors.NORMAL}")
             continue
 
+        # Check if the game should end
         if '_' not in guesses:
-            print(f"{Colors.GREEN}You guessed the word: {word}{Colors.NORMAL}")
+            message = "Congratulations! You've guessed the word: "
+            print(f"{Colors.GREEN}{message}{word}{Colors.NORMAL}")
             display_victory()
             return True
 
