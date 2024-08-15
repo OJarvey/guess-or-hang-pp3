@@ -87,9 +87,9 @@ def setup_game(level: str) -> tuple:
 # Menu and Interaction Functions
 def show_main_menu() -> str:
     """Displays the main menu and captures the user's selection."""
-    print(f"{Colors.ORANGE}\nMain Menu:{Colors.NORMAL}")
+    print(f"{Colors.NORMAL}\nMain Menu:{Colors.NORMAL}")
     print(f"{Colors.GREEN}1. Start Game{Colors.NORMAL}")
-    print(f"{Colors.CYAN}2. How to Play{Colors.NORMAL}")
+    print(f"{Colors.BLUE}2. How to Play{Colors.NORMAL}")
     print(f"{Colors.RED}3. Exit{Colors.NORMAL}")
 
     return input(f"{Colors.PURPLE}Choose an option (1/2/3): {Colors.NORMAL}")
@@ -98,7 +98,7 @@ def select_difficulty() -> str:
     """Prompts user to select a difficulty level."""
     print(f"{Colors.PURPLE}\nChoose Difficulty Level:{Colors.NORMAL}")
     print(f"{Colors.GREEN}1. Easy{Colors.NORMAL}")
-    print(f"{Colors.YELLOW}2. Medium{Colors.NORMAL}")
+    print(f"{Colors.BLUE}2. Medium{Colors.NORMAL}")
     print(f"{Colors.RED}3. Hard{Colors.NORMAL}")
     
     choice = input(f"{Colors.PURPLE}Select (1/2/3): {Colors.NORMAL}")
@@ -183,7 +183,7 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
             print(f"{Colors.RED}Invalid input. Please guess a single letter or the entire word.{Colors.NORMAL}")
             continue
               
-    if '_' not in guesses:
+        if '_' not in guesses:
             print(f"{Colors.GREEN}You guessed the word: {word}{Colors.NORMAL}")
             display_victory()
             return True
