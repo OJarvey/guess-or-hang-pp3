@@ -160,4 +160,7 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
                     if char == guess:
                         guesses[i] = guess
                 print(f"{Colors.GREEN}Correct!{Colors.NORMAL}")
-        
+                
+        else:
+            attempts_left -= 1
+            print(f"{Colors.RED}Wrong guess!{Colors.NORMAL}")
