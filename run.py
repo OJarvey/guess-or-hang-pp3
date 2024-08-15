@@ -64,3 +64,32 @@ def request_replay() -> bool:
             return choice == 'y'
         else:
             print(f"{Colors.RED}Invalid input. Please enter 'y' or 'n'.{Colors.NORMAL}")
+            
+
+# Game Setup Functions
+ATTEMPT_LIMITS = {
+    'easy': 5,
+    'medium': 3,
+    'hard': 1
+}
+
+def setup_game(level: str) -> tuple:
+    """Configures the game based on the chosen difficulty."""
+    word = fetch_word()
+    if not word:
+        return None, None, None
+
+    placeholder = ['_' for _ in word]
+    attempts = ATTEMPT_LIMITS.get(level, 5)
+
+    return word, placeholder, attempts
+
+# Menu and Interaction Functions
+def show_main_menu() -> str:
+    """Displays the main menu and captures the user's selection."""
+    print(f"{Colors.ORANGE}\nMain Menu:{Colors.NORMAL}")
+    print(f"{Colors.GREEN}1. Start Game{Colors.NORMAL}")
+    print(f"{Colors.CYAN}2. How to Play{Colors.NORMAL}")
+    print(f"{Colors.RED}3. Exit{Colors.NORMAL}")
+
+    return input(f"{Colors.PURPLE}Choose an option (1/2/3): {Colors.NORMAL}")
