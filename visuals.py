@@ -1,4 +1,3 @@
-# visuals.py
 import os
 
 class Colors:
@@ -29,7 +28,6 @@ class Colors:
         """Check if the terminal supports ANSI escape codes."""
         return os.getenv('ANSICON') is not None or os.getenv('TERM') == 'xterm' or 'COLORTERM' in os.environ
 
-# visuals.py
 
 HANGMAN_STAGES = [
     f"""{Colors.CYAN}
@@ -96,3 +94,11 @@ HANGMAN_STAGES = [
 {Colors.NORMAL}
 """
 ]
+
+def render_hangman_graphic(attempts, level):
+    """
+    Renders the hangman graphic based on the current difficulty level.
+    """
+    valid_levels = ['easy', 'medium', 'hard']
+    if not isinstance(level, str) or level not in valid_levels:
+     raise ValueError(f"Invalid level: {level}. Must be one of {valid_levels}.")
