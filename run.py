@@ -120,19 +120,19 @@ def select_difficulty() -> str:
 def display_instructions():
     """Shows the instructions for playing Hangman."""
     instructions = f"""{Colors.CYAN}
-    **Hangman Rules**
+    Hangman Rules
 
     Objective: Guess the hidden word before running out of lives.
     Difficulty Levels:
-    - Easy: 7 lives.
-    - Medium: 5 lives.
-    - Hard: 3 lives.
+    * Easy: 5 lives.
+    * Medium: 3 lives.
+    * Hard: 1 lives.
 
     How to Play:
 
-    - Input one letter at a time.
-    - Use hints strategically by typing 'hint'; they cost a life.
-    - Guess the entire word correctly before lives run out to win.
+    * Input one letter at a time.
+    * Use hints strategically by typing 'hint'; they cost a life.
+    * Guess the entire word correctly before lives run out to win.
 
     Enjoy and good luck!{Colors.NORMAL}
     """
@@ -145,13 +145,12 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
     """
     Manages the gameplay loop for one round.
     """
-    guessed_letters = set()
     attempts_left = attempts
     used_hint = False
 
     while attempts_left > 0:
         print(f"\n{' '.join(guesses)}")
-        print(f"{Colors.YELLOW}Attempts Left: {attempts_left}{Colors.NORMAL}")
+        print(f"{Colors.RED}Attempts Left: {attempts_left}{Colors.NORMAL}")
         render_hangman_graphic(attempts - attempts_left, level)
         message = "Enter a letter or guess the entire word:"
         guess = input(f"{Colors.PURPLE}{message}{Colors.NORMAL}").lower()
@@ -196,9 +195,10 @@ def play_round(word: str, guesses: list, attempts: int, level: str) -> bool:
             display_victory()
             return True
 
+        print(f"{Colors.RED}Attempts Left: {attempts_left}{Colors.NORMAL}")
+
     display_defeat()
-    print(f"{Colors.RED}The word was: {word}{Colors.NORMAL}")
-    render_hangman_graphic(attempts - attempts_left, level)
+    print(f"{Colors.CYAN}The word was:{Colors.YELLOW}{word}")
     return False
 
 
