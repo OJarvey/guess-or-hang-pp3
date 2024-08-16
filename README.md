@@ -144,7 +144,7 @@ Here’s a visual representation of the game’s flow:
 
 ### Home Screen
 
-![Home](readme-images\2.hangman-homescreen.png)
+![Home](readme-images/2.hangman-homescreen.png)
 
 ### Objective
 
@@ -250,7 +250,7 @@ Thanks to the PEP8 checker, my code is both functional and aligned with industry
 
 ***Vistuals.py***
 
-![Linter Visuals.py](readme-images\12.vistuals-py-linter.png)
+![Linter Visuals.py](readme-images/12.vistuals-py-linter.png)
 
 ### Performance Checks
 
