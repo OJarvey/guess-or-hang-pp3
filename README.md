@@ -16,12 +16,28 @@ Find link to game here: <https://guess-or-hang-bc6bf8f00227.herokuapp.com/>
 - [Technology Used](#technology-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Game Instructions](#game-instructions)
 - [Game Flowchart](#game-flowchart)
+- [Game Instructions](#game-instructions)
+- [Home Screen](#home-screen)
+- [Objective](#objective)
+- [How to Play](#how-to-play)
+- [Starting the Game](#starting-the-game)
+- [Selecting Difficulty](#selecting-difficulty)
+- [Making a Guess](#making-a-guess)
+- [Using Hints](#using-hints)
+- [Winning the Game](#winning-the-game)
+- [Losing the Game](#losing-the-game)
+- [Replaying the Game](#replaying-the-game)
+- [Exiting the Game](#exiting-the-game)
+- [Testing](#testing)
+- [CI Python Linter](#ci-python-linter)
+- [Performance Checks](#performance-checks)
+- [Bugs](#bugs)
 - [Testing](#testing)
 - [Performance Checks](#performance-checks)
 - [BUGS](#bugs)
 - [CREDITS](#credits)
+- [SPECIAL THANKS](#special-thanks)
 
 ## About the Project
 
@@ -138,80 +154,85 @@ The game ends when the word is fully guessed, or when the hangman is completely 
 
 ### How to Play
 
-1. **Starting the Game**:
-   - When the game starts, you'll be presented with a main menu.
+#### Starting the Game
 
-   - You can choose from three options:
-      1. Start Game: Begin a new game.
-      2. How to Play: View the game instructions.
-      3. Exit: Close the game.
-   - To start a new game, select "Start Game" from the menu.
+- When the game starts, you'll be presented with a main menu.
+
+- You can choose from three options:
+   1. Start Game: Begin a new game.
+   2. How to Play: View the game instructions.
+   3. Exit: Close the game.
+- To start a new game, select "Start Game" from the menu.
 
    ![main menu](readme-images/4.main-menu.png)
 
-2. **Selecting Difficulty**:
+#### Selecting Difficulty
 
-   - After choosing to start the game, you'll be prompted to select a difficulty level:
-      - Easy: 5 attempts allowed.
-      - Medium: 3 attempts allowed.
-      - Hard: 1 attempt allowed.
-      - The difficulty level affects how many incorrect guesses you can make before the game ends.
+- After choosing to start the game, you'll be prompted to select a difficulty level:
+  - Easy: 5 attempts allowed.
+  - Medium: 3 attempts allowed.
+  - Hard: 1 attempt allowed.
+  - The difficulty level affects how many incorrect guesses you can make before the game ends.
 
    ![Difficulty](readme-images/5.difficulty-menu.png)
 
-3. **Making a Guess**:
-   - The game will display a series of underscores ["_"], each representing a letter in the hidden word.
+#### Making a Guess
+
+- The game will display a series of underscores ["_"], each representing a letter in the hidden word.
 
    ![Underscore and Attemps](readme-images/14.underscore-with-attemps-left.png)
 
-   - You need to guess the letters of the word one at a time:
+- You need to guess the letters of the word one at a time:
       - Correct Guess: If the guessed letter is in the word, it will be revealed in all the correct positions.
 
    ![Correct Guess](readme-images/7.corrected-guess-screen.png)
 
-      - Incorrect Guess: If the guessed letter is not in the word,
+- Incorrect Guess: If the guessed letter is not in the word,
       one part of the hangman will be drawn, and you lose one attempt.
 
-      ![Incerrect Guess](readme-images/8.wrong-guess-screen.png)
+![Incerrect Guess](readme-images/8.wrong-guess-screen.png)
 
-      - You can also attempt to guess the entire word at once,
+- You can also attempt to guess the entire word at once,
    but be careful, if your guess is wrong, it counts as an incorrect attempt.
 
    **Invalid Input**
-   - Error Message:
-      - The game will display a friendly error message when invalid input is detected, guiding the player to make a correct guess.
-   - No Penalty:
-      - Invalid inputs do not count as an incorrect guess, so the player does not lose an attempt for entering invalid data.
+- Error Message:
+- The game will display a friendly error message when invalid input is detected, guiding the player to make a correct guess.
+- No Penalty:
+- Invalid inputs do not count as an incorrect guess, so the player does not lose an attempt for entering invalid data.
 
    ![Invalid Input](readme-images/9.invalid-input-screen.png)
 
-4. **Using Hints**:
-   - If you're stuck, you can type 'hint' to reveal one of the hidden letters in the word.
-   - Using a hint will cost you one attempt, so use it wisely.
-   - Hints are only available if you have more than one attempt left.
+#### Using Hints
 
-5. **Winning the Game**:
-   - You win the game by guessing all the letters in the word correctly before running out of attempts.
-   - When you win, a victory screen will be displayed, congratulating you on your success and asking if you want to play again.
+- If you're stuck, you can type 'hint' to reveal one of the hidden letters in the word.
+- Using a hint will cost you one attempt, so use it wisely.
+- Hints are only available if you have more than one attempt left.
+
+#### Winning the Game
+
+- You win the game by guessing all the letters in the word correctly before running out of attempts.
+- When you win, a victory screen will be displayed, congratulating you on your success and asking if you want to play again.
 
    ![Winning](readme-images/15.winning-screen.png)
 
-6. **Losing the Game**:
-   - If you run out of attempts before guessing the word, the game ends, and the hangman is fully drawn.
-   - A defeat screen will be displayed, showing the correct word and asking if you want to play.
+#### Losing the Game
+
+- If you run out of attempts before guessing the word, the game ends, and the hangman is fully drawn.
+- A defeat screen will be displayed, showing the correct word and asking if you want to play.
 
    ![Game Over](readme-images/13.game-over.png)
 
-7. Replaying the Game:
+#### Replaying the Game
 
-   - After the game ends, whether you win or lose, you will be asked if you want to play again.
-   - Type y to start a new game or n to exit.
+- After the game ends, whether you win or lose, you will be asked if you want to play again.
+- Type y to start a new game or n to exit.
 
    ![Replay](readme-images/16.play-again.png)
 
-8. Exiting the Game:
+#### Exiting the Game
 
-   - You can exit the game at any time by selecting "Exit" from the main menu or by choosing not to replay after a game ends.
+- You can exit the game at any time by selecting "Exit" from the main menu or by choosing not to replay after a game ends.
 
 ## Testing
 
@@ -267,6 +288,10 @@ During the development of the Hangman game, several bugs were identified and res
 
    - Solution: Logic was added to check whether the word was already fully guessed before allowing a hint to be used. If the word was complete, the hint option was disabled, and no attempts were deducted.
 
+***Unfixed Bugs***
+
+At present, there are no known bugs in the application. It has undergone rigorous testing to ensure a smooth user experience.
+
 ### CREDITS
 
 - [ASCII ART] (<https://www.asciiart.eu/text-to-ascii-art>) - This tool was utilized to map out and conceptualize the overall structure of the game.
@@ -275,3 +300,14 @@ During the development of the Hangman game, several bugs were identified and res
 - [Stack Overflow](https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal) - This source provided guidance on how
 to print colored text to the terminal, which was implemented in the game for visual enhancement.
 - [Hangman Youtube Tutorial](https://www.youtube.com/watch?v=m4nEnsavl6w&t=155s&ab_channel=Kite) - This tutorial provided valuable insights and inspiration during the conceptual development of the Hangman game.
+
+## SPECIAL THANKS
+
+I would like to extend my heartfelt gratitude to Code Institute for their invaluable help and support throughout this project.
+Their resources and guidance were instrumental in bringing this game to life.
+
+A special thanks goes to my mentor Spencer Barriball, whose encouraging words and unwavering support kept me motivated,
+especially during moments when the challenges felt overwhelming. Your guidance has been truly inspiring.
+
+I am also deeply grateful to my family and friends for their continuous support and encouragement.
+Your belief in me has been a driving force, and I couldn’t have done this without you.
