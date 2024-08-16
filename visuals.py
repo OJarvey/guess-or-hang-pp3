@@ -229,7 +229,7 @@ def display_defeat():
  /|\\  |
  / \\  |
       |
-{Colors.RED}
+{Colors.NORMAL}
 """
 
     check_and_print(defeat)
