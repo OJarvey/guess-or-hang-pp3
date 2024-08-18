@@ -300,6 +300,7 @@ At present, there are no known bugs in the application. It has undergone rigorou
 - [Stack Overflow](https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal) - This source provided guidance on how
 to print colored text to the terminal, which was implemented in the game for visual enhancement.
 - [Hangman Youtube Tutorial](https://www.youtube.com/watch?v=m4nEnsavl6w&t=155s&ab_channel=Kite) - This tutorial provided valuable insights and inspiration during the conceptual development of the Hangman game.
+- [Grammarly](https://app.grammarly.com/) - This tool was used for suggestions and correcting grammar errors.
 
 ## SPECIAL THANKS
 
